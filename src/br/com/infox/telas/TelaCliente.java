@@ -382,7 +382,8 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCliAlterarActionPerformed
 
     private void txtClienteIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteIdActionPerformed
-        // TODO add your handling code here:
+        /*txt */// TODO add your handling code here:
+
     }//GEN-LAST:event_txtClienteIdActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
