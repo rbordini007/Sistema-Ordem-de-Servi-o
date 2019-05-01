@@ -9,6 +9,7 @@ public class ModuloConexao {
         java.sql.Connection conexao = null;
 
         String driver = "com.mysql.jdbc.Driver";
+        //String url = "jdbc:mysql://192.168.1.20:3306/dbinfox";
         String url = "jdbc:mysql://localhost:3306/dbinfox";
         String user = "root";
         String password = "";

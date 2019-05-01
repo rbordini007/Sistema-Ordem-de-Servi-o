@@ -149,6 +149,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menRelatorioServico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         menRelatorioServico.setText("Serviços");
+        menRelatorioServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menRelatorioServicoActionPerformed(evt);
+            }
+        });
         menRelatorio.add(menRelatorioServico);
 
         Menu.add(menRelatorio);
@@ -194,23 +199,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsuario)
                     .addComponent(lblData)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsuario))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(55, 55, 55)
                 .addComponent(lblUsuario)
-                .addGap(58, 58, 58)
+                .addGap(59, 59, 59)
                 .addComponent(lblData)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,7 +229,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         //a linha abaixo substitue a label lblData por data atual
         Date data = new Date();
-        DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
+        DateFormat formatador = DateFormat.getDateInstance(DateFormat.MEDIUM);
         lblData.setText(formatador.format(data));
 
     }//GEN-LAST:event_formWindowActivated
@@ -289,6 +294,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void menRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelatorioActionPerformed
 
     }//GEN-LAST:event_menRelatorioActionPerformed
+
+    private void menRelatorioServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelatorioServicoActionPerformed
+        // relatorio Serviços
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Impressão deste relatório?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_OPTION) {
+            // imprimindo o relatório com jasper studio
+            try {
+                //Usando a classe Jasperprint para preparar a impressao do relatorio
+                JasperPrint print = JasperFillManager.fillReport("C:/Users/rbord/JaspersoftWorkspace/MyReports/servicos.jasper", null, conexao);
+                // a linha abaixo exibe o relatorio atraves da classe jasperViewer
+                JasperViewer.viewReport(print, false);
+
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, e);
+
+            }
+        }
+    }//GEN-LAST:event_menRelatorioServicoActionPerformed
 
     /**
      * @param args the command line arguments

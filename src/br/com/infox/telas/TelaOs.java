@@ -2,8 +2,13 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class TelaOs extends javax.swing.JInternalFrame {
 
@@ -182,6 +187,28 @@ public class TelaOs extends javax.swing.JInternalFrame {
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
+    }
+
+    private void imprimir() {
+        //imprimir OS
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Impressão desta OS?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_OPTION) {
+            // imprimindo o relatório com jasper studio
+            try {
+                // usar uma classe para criar um filtro com hashMap para criar um filtro
+                HashMap filtro = new HashMap();
+                filtro.put("os", Integer.parseInt(txtNoS.getText()));
+                //Usando a classe Jasperprint para preparar a impressao do relatorio
+                JasperPrint print = JasperFillManager.fillReport("C:/Users/rbord/JaspersoftWorkspace/MyReports/os.jasper", filtro, conexao);
+                // a linha abaixo exibe o relatorio atraves da classe jasperViewer
+                JasperViewer.viewReport(print, false);
+
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(null, e);
+
             }
         }
 
@@ -475,6 +502,11 @@ public class TelaOs extends javax.swing.JInternalFrame {
         jButtonImprimir.setToolTipText("Imprimir OS");
         jButtonImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonImprimir.setPreferredSize(new java.awt.Dimension(60, 60));
+        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -508,7 +540,7 @@ public class TelaOs extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBoxSituacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(31, 31, 31)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, Short.MAX_VALUE)))
                 .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(160, Short.MAX_VALUE)
@@ -630,6 +662,12 @@ public class TelaOs extends javax.swing.JInternalFrame {
         // Excluir
         deletarOs();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+        // TODO add your handling code here:
+        imprimir();
+
+    }//GEN-LAST:event_jButtonImprimirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
